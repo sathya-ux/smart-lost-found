@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Prediction Result</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial,sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            background:linear-gradient(135deg,#4facfe,#00f2fe);
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px 15px;
+        }
+
+        .container{
+            width:520px;
+            max-width:100%;
+            background:white;
+            padding:30px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        h1{
+            text-align:center;
+            color:#007bff;
+            margin-bottom:25px;
+        }
+
+        .image-box{
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        .image-box img{
+            width:250px;
+            height:250px;
+            object-fit:cover;
+            border-radius:15px;
+            border:3px solid #007bff;
+        }
+
+        .details{
+            background:#f8f9fa;
+            padding:20px;
+            border-radius:15px;
+        }
+
+        .row{
+            margin-bottom:14px;
+            font-size:16px;
+        }
+
+        .label{
+            font-weight:bold;
+            color:#333;
+        }
+
+        .prediction{
+            margin-top:20px;
+            padding:20px;
+            background:#e8f5e9;
+            border-radius:15px;
+            text-align:center;
+        }
+
+        .prediction h2{
+            color:#28a745;
+            margin-bottom:10px;
+        }
+
+        .object-name{
+            font-size:26px;
+            font-weight:bold;
+            color:#007bff;
+            text-transform:capitalize;
+        }
+
+        .confidence{
+            margin-top:15px;
+            font-size:20px;
+            font-weight:bold;
+            color:#333;
+        }
+
+        .back-btn{
+            display:block;
+            text-align:center;
+            margin-top:20px;
+            padding:13px;
+            background:#007bff;
+            color:white;
+            text-decoration:none;
+            border-radius:25px;
+            font-weight:bold;
+        }
+
+        .back-btn:hover{
+            background:#0056b3;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🤖 AI Prediction Result</h1>
+
+
+    <!-- Uploaded Image -->
+
+    <div class="image-box">
+
+        <img
+            src="{{ url_for('static', filename='uploads/' + image_name) }}"
+            alt="Uploaded Item"
+        >
+
+    </div>
+
+
+    <!-- Item Details -->
+
+    <div class="details">
+
+        <div class="row">
+            <span class="label">📦 Item Name:</span>
+            {{ item_name }}
+        </div>
+
+        <div class="row">
+            <span class="label">📝 Description:</span>
+            {{ description }}
+        </div>
+
+        <div class="row">
+            <span class="label">📅 Lost Date:</span>
+            {{ lost_date }}
+        </div>
+
+        <div class="row">
+            <span class="label">📍 Location:</span>
+            {{ location }}
+        </div>
+
+        <div class="row">
+            <span class="label">📞 Contact:</span>
+            {{ contact }}
+        </div>
+
+    </div>
+
+
+    <!-- AI Result -->
+
+    <div class="prediction">
+
+        <h2>🔍 AI Prediction</h2>
+
+        <div class="object-name">
+            {{ prediction }}
+        </div>
+
+        <div class="confidence">
+            📊 Confidence: {{ confidence }}%
+        </div>
+
+    </div>
+
+
+    <!-- Back Button -->
+
+    <a href="/" class="back-btn">
+        🔄 Upload Another Item
+    </a>
+
+</div>
+
+</body>
+
+</html>

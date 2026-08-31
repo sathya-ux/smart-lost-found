@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Lost & Found</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#4facfe,#00f2fe);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px 15px;
+        }
+
+        .container{
+            background:white;
+            width:500px;
+            max-width:100%;
+            padding:35px;
+            border-radius:20px;
+            box-shadow:0 10px 30px rgba(0,0,0,0.2);
+            text-align:center;
+        }
+
+        h1{
+            color:#007bff;
+            margin-bottom:10px;
+            font-size:32px;
+        }
+
+        .subtitle{
+            color:#555;
+            margin-bottom:25px;
+            line-height:1.5;
+        }
+
+        .form-group{
+            text-align:left;
+            margin-bottom:12px;
+        }
+
+        label{
+            display:block;
+            font-weight:bold;
+            color:#333;
+            margin-bottom:6px;
+        }
+
+        input,
+        textarea{
+            width:100%;
+            padding:13px;
+            border:1px solid #ccc;
+            border-radius:10px;
+            font-size:16px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus,
+        textarea:focus{
+            border-color:#007bff;
+            box-shadow:0 0 5px rgba(0,123,255,0.2);
+        }
+
+        textarea{
+            resize:none;
+        }
+
+        input[type="file"]{
+            padding:10px;
+            background:#f8f9fa;
+            cursor:pointer;
+        }
+
+        button{
+            width:100%;
+            padding:15px;
+            margin-top:15px;
+            background:#28a745;
+            color:white;
+            border:none;
+            border-radius:30px;
+            font-size:18px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#218838;
+            transform:scale(1.03);
+        }
+
+        .info{
+            margin-top:20px;
+            padding:12px;
+            background:#f1f8ff;
+            border-radius:10px;
+            color:#555;
+            font-size:14px;
+        }
+
+        .ai{
+            color:#007bff;
+            font-weight:bold;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔍 Smart Lost & Found</h1>
+
+    <p class="subtitle">
+        Upload your lost item details and let AI identify the object.
+    </p>
+
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+
+        <!-- Item Name -->
+        <div class="form-group">
+            <label>📦 Item Name</label>
+
+            <input
+                type="text"
+                name="item_name"
+                placeholder="Enter item name"
+                required
+            >
+        </div>
+
+
+        <!-- Description -->
+        <div class="form-group">
+            <label>📝 Description</label>
+
+            <textarea
+                name="description"
+                rows="4"
+                placeholder="Describe the item..."
+                required
+            ></textarea>
+        </div>
+
+
+        <!-- Lost Date -->
+        <div class="form-group">
+            <label>📅 Lost Date</label>
+
+            <input
+                type="date"
+                name="lost_date"
+                required
+            >
+        </div>
+
+
+        <!-- Location -->
+        <div class="form-group">
+            <label>📍 Lost Location</label>
+
+            <input
+                type="text"
+                name="location"
+                placeholder="Where did you lose the item?"
+                required
+            >
+        </div>
+
+
+        <!-- Contact -->
+        <div class="form-group">
+            <label>📞 Contact Number</label>
+
+            <input
+                type="tel"
+                name="contact"
+                placeholder="Enter contact number"
+                required
+            >
+        </div>
+
+
+        <!-- Image -->
+        <div class="form-group">
+            <label>🖼️ Upload Item Image</label>
+
+            <input
+                type="file"
+                name="image"
+                accept="image/*"
+                required
+            >
+        </div>
+
+
+        <!-- Submit -->
+        <button type="submit">
+            📤 Upload & Predict
+        </button>
+
+    </form>
+
+
+    <div class="info">
+        🤖 <span class="ai">AI Powered</span><br>
+        The system will analyze your image and show the
+        predicted object and confidence percentage.
+    </div>
+
+</div>
+
+</body>
+
+</html>

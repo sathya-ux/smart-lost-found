@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Smart Lost & Found</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background: linear-gradient(
+                135deg,
+                #4facfe,
+                #00f2fe
+            );
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .container {
+            width: 900px;
+            max-width: 95%;
+
+            background: white;
+
+            padding: 45px;
+
+            border-radius: 25px;
+
+            text-align: center;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,0.20);
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #1976d2;
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: #666;
+            font-size: 18px;
+            margin-bottom: 35px;
+        }
+
+        .options {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .option {
+            width: 320px;
+
+            padding: 30px;
+
+            border-radius: 20px;
+
+            text-decoration: none;
+
+            transition: 0.3s;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.12);
+        }
+
+        .option:hover {
+            transform: translateY(-8px);
+
+            box-shadow:
+                0 15px 30px
+                rgba(0,0,0,0.18);
+        }
+
+        .lost {
+            background: #e3f2fd;
+        }
+
+        .found {
+            background: #e8f5e9;
+        }
+
+        .uploads {
+            background: #fff3e0;
+        }
+
+        .option-icon {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        .option h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .option p {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .button {
+            display: inline-block;
+
+            padding: 12px 25px;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-weight: bold;
+        }
+
+        .lost .button {
+            background: #1976d2;
+        }
+
+        .found .button {
+            background: #2e7d32;
+        }
+
+        .uploads .button {
+            background: #ef6c00;
+        }
+
+        .footer {
+            margin-top: 35px;
+
+            color: #888;
+
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 30px;
+            }
+
+            .option {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="container">
+
+        <div class="icon">
+            🔍
+        </div>
+
+        <h1>
+            Smart Lost & Found
+        </h1>
+
+        <p class="subtitle">
+            AI Powered Lost Item Identification & Matching
+        </p>
+
+
+        <div class="options">
+
+
+            <!-- ========================================= -->
+            <!-- LOST ITEM -->
+            <!-- ========================================= -->
+
+            <a href="/lost"
+               class="option lost">
+
+                <div class="option-icon">
+                    📦
+                </div>
+
+                <h2>
+                    Lost Item
+                </h2>
+
+                <p>
+                    Lost something?
+                    Upload the item details and image
+                    to find it easily.
+                </p>
+
+                <span class="button">
+                    Upload Lost Item
+                </span>
+
+            </a>
+
+
+            <!-- ========================================= -->
+            <!-- FOUND ITEM -->
+            <!-- ========================================= -->
+
+            <a href="/found"
+               class="option found">
+
+                <div class="option-icon">
+                    🔎
+                </div>
+
+                <h2>
+                    Found Item
+                </h2>
+
+                <p>
+                    Found something?
+                    Upload the item image and details
+                    to find its owner.
+                </p>
+
+                <span class="button">
+                    Upload Found Item
+                </span>
+
+            </a>
+
+
+            <!-- ========================================= -->
+            <!-- MY UPLOADS -->
+            <!-- ========================================= -->
+
+            <a href="/my_uploads"
+               class="option uploads">
+
+                <div class="option-icon">
+                    📋
+                </div>
+
+                <h2>
+                    My Uploads
+                </h2>
+
+                <p>
+                    View all your previously
+                    uploaded Lost and Found items.
+                </p>
+
+                <span class="button">
+                    View My Uploads
+                </span>
+
+            </a>
+
+
+        </div>
+
+
+        <div class="footer">
+
+            🤖 Powered by AI Image Recognition
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

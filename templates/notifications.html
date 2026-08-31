@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Notifications</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 650px;
+            margin: 60px auto;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        .notification {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+            text-align: left;
+        }
+
+        .notification h2 {
+            color: #28a745;
+        }
+
+        .notification p {
+            color: #444;
+            line-height: 1.6;
+        }
+
+        .match {
+            color: #d35400;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .popup {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+            border-left: 6px solid #28a745;
+            z-index: 9999;
+            animation: slideIn 0.5s ease;
+        }
+
+        .popup h2 {
+            margin-top: 0;
+            color: #28a745;
+            font-size: 20px;
+        }
+
+        .popup p {
+            color: #444;
+            line-height: 1.5;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            border: none;
+            background: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🔔 Notifications</h1>
+
+    {% if notifications %}
+
+        {% for notification in notifications %}
+
+        <div class="notification">
+
+            <h2>✅ Matching Item Found</h2>
+
+            <p>
+                <strong>Message:</strong>
+                {{ notification[1] }}
+            </p>
+
+            <p>
+                <strong>Item Name:</strong>
+                {{ notification[2] }}
+            </p>
+
+            <p>
+                <strong>Description:</strong>
+                {{ notification[3] }}
+            </p>
+
+            <p>
+                <strong>Location:</strong>
+                {{ notification[5] }}
+            </p>
+
+            <p>
+                <strong>Contact:</strong>
+                {{ notification[6] }}
+            </p>
+
+            <p class="match">
+                🎯 Match Percentage:
+                {{ notification[7] }}%
+            </p>
+
+            <p>
+                <strong>Date:</strong>
+                {{ notification[8] }}
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <div class="notification">
+            <p>No notification available</p>
+        </div>
+
+    {% endif %}
+
+</div>
+
+
+<!-- POPUP NOTIFICATION -->
+
+{% if notifications %}
+
+<div class="popup" id="notificationPopup">
+
+    <button class="close-btn"
+            onclick="closeNotification()">
+        ×
+    </button>
+
+    <h2>🔔 New Notification</h2>
+
+    <p>
+        {{ notifications[0][1] }}
+    </p>
+
+    <p>
+        <strong>Item:</strong>
+        {{ notifications[0][2] }}
+    </p>
+
+    <p class="match">
+        Match: {{ notifications[0][7] }}%
+    </p>
+
+</div>
+
+{% endif %}
+
+
+<script>
+
+function closeNotification() {
+
+    document.getElementById("notificationPopup").style.display = "none";
+
+}
+
+</script>
+
+</body>
+</html>

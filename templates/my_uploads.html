@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>My Uploads - Smart Lost & Found</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            color: white;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .card p {
+            margin: 8px 0;
+            color: #555;
+        }
+
+        .prediction {
+            color: #1976d2 !important;
+            font-weight: bold;
+        }
+
+        .confidence {
+            color: #2e7d32 !important;
+            font-weight: bold;
+        }
+
+        .empty {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            color: #666;
+        }
+
+        .back-btn {
+            display: block;
+            width: fit-content;
+            margin: 35px auto 10px;
+            padding: 12px 25px;
+            background: white;
+            color: #1976d2;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+    <h1>📋 My Uploaded Items</h1>
+
+
+    <!-- ================================================= -->
+    <!-- LOST ITEMS -->
+    <!-- ================================================= -->
+
+    <h2 class="section-title">
+        🔴 Lost Items
+    </h2>
+
+    {% if lost_items %}
+
+    <div class="grid">
+
+        {% for item in lost_items %}
+
+        <div class="card">
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + item[6]) }}"
+                alt="Lost Item"
+            >
+
+            <h3>
+                📦 {{ item[1] }}
+            </h3>
+
+            <p>
+                📝 <strong>Description:</strong>
+                {{ item[2] }}
+            </p>
+
+            <p>
+                📅 <strong>Lost Date:</strong>
+                {{ item[3] }}
+            </p>
+
+            <p>
+                📍 <strong>Location:</strong>
+                {{ item[4] }}
+            </p>
+
+            <p>
+                📞 <strong>Contact:</strong>
+                {{ item[5] }}
+            </p>
+
+            <p class="prediction">
+                🔎 AI Prediction:
+                {{ item[7] }}
+            </p>
+
+            <p class="confidence">
+                📊 AI Confidence:
+                {{ "%.2f"|format(item[8]) }}%
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        No lost items uploaded yet.
+    </div>
+
+    {% endif %}
+
+
+
+    <!-- ================================================= -->
+    <!-- FOUND ITEMS -->
+    <!-- ================================================= -->
+
+    <h2 class="section-title">
+        🟢 Found Items
+    </h2>
+
+    {% if found_items %}
+
+    <div class="grid">
+
+        {% for item in found_items %}
+
+        <div class="card">
+
+            <img
+                src="{{ url_for('static', filename='uploads/' + item[6]) }}"
+                alt="Found Item"
+            >
+
+            <h3>
+                📦 {{ item[1] }}
+            </h3>
+
+            <p>
+                📝 <strong>Description:</strong>
+                {{ item[2] }}
+            </p>
+
+            <p>
+                📅 <strong>Found Date:</strong>
+                {{ item[3] }}
+            </p>
+
+            <p>
+                📍 <strong>Location:</strong>
+                {{ item[4] }}
+            </p>
+
+            <p>
+                📞 <strong>Contact:</strong>
+                {{ item[5] }}
+            </p>
+
+            <p class="prediction">
+                🔎 AI Prediction:
+                {{ item[7] }}
+            </p>
+
+            <p class="confidence">
+                📊 AI Confidence:
+                {{ "%.2f"|format(item[8]) }}%
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% else %}
+
+    <div class="empty">
+        No found items uploaded yet.
+    </div>
+
+    {% endif %}
+
+
+    <a href="/" class="back-btn">
+        🏠 Back to Home
+    </a>
+
+</div>
+
+</body>
+
+</html>
