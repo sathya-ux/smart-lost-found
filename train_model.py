@@ -10,9 +10,11 @@ import os
 # ==========================================
 
 DATASET_DIR = "dataset"
-MODEL_PATH = "model/lost_item_model.keras"
+
+MODEL_PATH = "model/lost_item_model.h5"
 
 IMG_SIZE = (224, 224)
+
 BATCH_SIZE = 5
 
 
@@ -29,6 +31,7 @@ train_datagen = ImageDataGenerator(
     height_shift_range=0.1,
     horizontal_flip=True
 )
+
 
 train_data = train_datagen.flow_from_directory(
     DATASET_DIR,
@@ -48,6 +51,7 @@ validation_datagen = ImageDataGenerator(
     preprocessing_function=preprocess_input,
     validation_split=0.2
 )
+
 
 validation_data = validation_datagen.flow_from_directory(
     DATASET_DIR,
@@ -69,7 +73,9 @@ base_model = MobileNetV2(
     input_shape=(224, 224, 3)
 )
 
-# First freeze the base model
+
+# Freeze base model first
+
 base_model.trainable = False
 
 
@@ -78,6 +84,7 @@ base_model.trainable = False
 # ==========================================
 
 model = models.Sequential([
+
     base_model,
 
     layers.GlobalAveragePooling2D(),
@@ -95,6 +102,7 @@ model = models.Sequential([
         train_data.num_classes,
         activation="softmax"
     )
+
 ])
 
 
@@ -103,11 +111,15 @@ model = models.Sequential([
 # ==========================================
 
 model.compile(
+
     optimizer=tf.keras.optimizers.Adam(
         learning_rate=0.001
     ),
+
     loss="categorical_crossentropy",
+
     metrics=["accuracy"]
+
 )
 
 
@@ -119,10 +131,15 @@ print("\n================================")
 print("STARTING AI TRAINING")
 print("================================\n")
 
+
 model.fit(
+
     train_data,
+
     validation_data=validation_data,
+
     epochs=15
+
 )
 
 
@@ -134,26 +151,38 @@ print("\n================================")
 print("STARTING FINE TUNING")
 print("================================\n")
 
+
 base_model.trainable = True
 
+
 # Freeze most layers
+
 for layer in base_model.layers[:-30]:
+
     layer.trainable = False
 
 
 model.compile(
+
     optimizer=tf.keras.optimizers.Adam(
         learning_rate=0.00001
     ),
+
     loss="categorical_crossentropy",
+
     metrics=["accuracy"]
+
 )
 
 
 model.fit(
+
     train_data,
+
     validation_data=validation_data,
+
     epochs=10
+
 )
 
 
@@ -161,9 +190,18 @@ model.fit(
 # SAVE MODEL
 # ==========================================
 
-os.makedirs("model", exist_ok=True)
+os.makedirs(
+    "model",
+    exist_ok=True
+)
 
-model.save(MODEL_PATH)
+
+print("\nSaving AI Model...")
+
+
+model.save(
+    MODEL_PATH
+)
 
 
 # ==========================================
@@ -174,11 +212,30 @@ print("\n================================")
 print("CUSTOM AI MODEL SAVED!")
 print("================================")
 
-print("Model:", MODEL_PATH)
+
+print(
+    "Model:",
+    MODEL_PATH
+)
+
 
 print("\nClass Names:")
 
+
 for name, index in train_data.class_indices.items():
-    print(index, "=", name)
+
+    print(
+        index,
+        "=",
+        name
+    )
+
+
+print("\nTensorFlow Version:")
+
+print(
+    tf.__version__
+)
+
 
 print("\nTraining Completed Successfully!")
