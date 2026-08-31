@@ -152,38 +152,28 @@ def extract_features(image_path):
     )
 
     img_array = keras_image.img_to_array(img)
-
-    img_array = np.expand_dims(
-        img_array,
-        axis=0
-    )
-
+    img_array = np.expand_dims(img_array, axis=0)
     img_array = preprocess_input(img_array)
 
-    # Custom MobileNetV2 base model
+    # Use MobileNetV2 base model
     base_model = model.layers[0]
 
-    features = base_model.predict(
-        img_array,
-        verbose=0
-    )
+    # Get features
+    features = base_model(img_array, training=False)
 
-    # Average spatial features
+    # Global average pooling
     features = np.mean(
-        features,
+        features.numpy(),
         axis=(1, 2)
     )[0]
 
-    # Normalize feature vector
+    # Normalize
     norm = np.linalg.norm(features)
 
-    if norm != 0:
-
+    if norm > 0:
         features = features / norm
 
     return features
-
-
 # =========================================================
 # IMAGE SIMILARITY
 # =========================================================
