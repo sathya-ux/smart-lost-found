@@ -18,6 +18,7 @@ app = Flask(__name__)
 UPLOAD_FOLDER = "static/uploads"
 DATABASE = "lost_found.db"
 MODEL_PATH = "model/lost_item_model.keras"
+MODEL_PATH = "model/lost_item_model.h5"
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
